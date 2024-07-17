@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form with Smiley Faces</title>
+    <style>
+        .smiley {
+            font-size: 2rem;
+            display: none;
+        }
+        .smiley.selected {
+            display: inline;
+        }
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            border:1px solid;
+          /*border-radius: 25px;*/
+           background-color:lightgray;
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: auto;
+            background-color: lightgray;
+            margin: 0;
+            position: relative;
+        }
+        .progress-bar:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: lightblue;
+            width: 0;
+            transition: width 0.3s;
+        }
+        .input{
+            margin: 0px !important;
+        }
+    </style>
+</head>
+<body>
+    <form id="feedback-form">
+ <span class="smiley" data-value="1">&#128577;</span>
+<span class="smiley" data-value="2">&#128578;</span>
+  <span class="smiley" data-value="3">&#128528;</span>
+  <span class="smiley" data-value="4">&#128515;</span>
+   <span class="smiley" data-value="5">&#128522;</span>
+       
+        <div class="progress-container">
+
+            <input type="radio" name="rating" value="1" id="smiley1" >
+            
+            <div class="progress-bar" id="progress-bar-1"></div>
+            
+            
+            
+
+            <input type="radio" name="rating" value="2" id="smiley2">
+           
+            <div class="progress-bar" id="progress-bar-2"></div>
+       
+
+  
+      
+            <input type="radio" name="rating" value="3" id="smiley3">
+           
+            <div class="progress-bar" id="progress-bar-3"></div>
+      
+        
+        
+        
+         
+            <input type="radio" name="rating" value="4" id="smiley4">
+           
+            <div class="progress-bar" id="progress-bar-4"></div>
+       
+        
+        
+        
+        
+            <input type="radio" name="rating" value="5" id="smiley5">
+            
+            <div class="progress-bar" id="progress-bar-5"></div>
+       
+            
+            
+            
+        </div>
+        
+        
+       
+        
+        
+      
+        
+        
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const smileys = document.querySelectorAll('.smiley');
+            const radios = document.querySelectorAll('input[name="rating"]');
+            const progressBars = document.querySelectorAll('.progress-bar');
+            const progresscon = document.querySelectorAll('.progress-container'); 
+            
+
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    updateSmileys(radio.value);
+                    updateProgressBar(radio.value);
+                });
+            });
+
+            function updateSmileys(value) {
+                smileys.forEach(smiley => {
+                    if (smiley.getAttribute('data-value') == value) {
+                        smiley.classList.add('selected');
+                    } else {
+                        smiley.classList.remove('selected');
+                    }
+                });
+            }
+
+            function updateProgressBar(value) {
+            
+                progressBars.forEach((bar, index) => {
+                    if (index < value) {
+                        bar.style.backgroundColor = 'lightblue';
+                        //bar.style.borderRadius = '10px';
+                        bar.style.height = 'auto';
+                        bar.style.width = '100%';
+                        //progresscon.backgroundColor = 'lightblue';
+                    } else {
+                        bar.style.backgroundColor = 'lightgray';
+                        //bar.style.borderRadius = '10px';
+                        bar.style.height = 'auto';
+                        bar.style.width = '100%';
+                         //progresscon.backgroundColor = 'lightgray';
+                    }
+                });
+                
+                 progresscon.forEach((bars, index) => {
+                    if (index < value) {
+                        
+                        bars.backgroundColor = 'lightblue';
+                    } else {
+                        
+                         bars.backgroundColor = 'lightgray';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
